@@ -1,8 +1,6 @@
 # claude-code-transcripts-extended
 
-[![PyPI](https://img.shields.io/pypi/v/claude-code-transcripts-extended.svg)](https://pypi.org/project/claude-code-transcripts-extended/)
-[![Changelog](https://img.shields.io/github/v/release/baboonzero/claude-code-transcripts-extended?include_prereleases&label=changelog)](https://github.com/baboonzero/claude-code-transcripts-extended/releases)
-[![Tests](https://github.com/baboonzero/claude-code-transcripts-extended/workflows/Test/badge.svg)](https://github.com/baboonzero/claude-code-transcripts-extended/actions?query=workflow%3ATest)
+[![Tests](https://github.com/baboonzero/claude-code-transcripts-extended/actions/workflows/test.yml/badge.svg)](https://github.com/baboonzero/claude-code-transcripts-extended/actions/workflows/test.yml)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/baboonzero/claude-code-transcripts-extended/blob/main/LICENSE)
 
 Convert Claude Code session files (JSON or JSONL) to clean, mobile-friendly HTML pages with pagination, dark mode support, and pattern extraction.
