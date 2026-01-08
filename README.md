@@ -29,12 +29,13 @@ uvx claude-code-transcripts-extended --help
 
 This tool converts Claude Code session files into browseable multi-page HTML transcripts.
 
-There are four commands available:
+There are five commands available:
 
 - `local` (default) - select from local Claude Code sessions stored in `~/.claude/projects`
 - `web` - select from web sessions via the Claude API
 - `json` - convert a specific JSON or JSONL session file
 - `all` - convert all local sessions to a browsable HTML archive
+- `patterns` - extract your coding patterns and preferences into a knowledge bank
 
 The quickest way to view a recent local session:
 
@@ -206,6 +207,47 @@ claude-code-transcripts-extended all -o ./my-archive
 # Include agent sessions
 claude-code-transcripts-extended all --include-agents
 ```
+
+### Pattern extraction
+
+Extract your coding patterns and preferences from your Claude Code sessions into a personal knowledge bank. This feature uses the Anthropic API to analyze your conversations and identify recurring instructions, coding style patterns, and corrections.
+
+**Requirements:** An Anthropic API key is required. Set it via environment variable:
+
+```bash
+# Windows PowerShell (permanent)
+[System.Environment]::SetEnvironmentVariable('ANTHROPIC_API_KEY', 'your-key-here', 'User')
+
+# macOS/Linux
+export ANTHROPIC_API_KEY="your-key-here"
+```
+
+Or pass it directly with `--api-key`:
+
+```bash
+claude-code-transcripts-extended patterns --api-key "your-key-here"
+```
+
+**Usage examples:**
+
+```bash
+# Run full analysis (extracts prompts + LLM analysis)
+claude-code-transcripts-extended patterns
+
+# Extract prompts only (no API calls, useful for preview)
+claude-code-transcripts-extended patterns --extract-only
+
+# Review patterns interactively before saving
+claude-code-transcripts-extended patterns --review
+
+# Analyze only new sessions since last run
+claude-code-transcripts-extended patterns --update
+
+# Specify custom output path
+claude-code-transcripts-extended patterns -o ./my_knowledge_bank.md
+```
+
+The output is a Markdown file (`my_patterns.md` by default) containing your discovered patterns organized by category.
 
 ## Acknowledgements
 
