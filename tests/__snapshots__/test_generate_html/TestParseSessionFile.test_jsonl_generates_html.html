@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code transcript - Index</title>
+    <style>
+:root {
+    --bg-color: #f5f5f5;
+    --card-bg: #ffffff;
+    --user-bg: #e3f2fd;
+    --user-border: #1976d2;
+    --assistant-bg: #f5f5f5;
+    --assistant-border: #9e9e9e;
+    --thinking-bg: #fff8e1;
+    --thinking-border: #ffc107;
+    --thinking-text: #666;
+    --tool-bg: #f3e5f5;
+    --tool-border: #9c27b0;
+    --tool-result-bg: #e8f5e9;
+    --tool-error-bg: #ffebee;
+    --text-color: #212121;
+    --text-muted: #757575;
+    --code-bg: #263238;
+    --code-text: #aed581;
+    --tool-reply-bg: #fff8e1;
+    --tool-reply-border: #ff9800;
+    --tool-reply-label: #e65100;
+    --write-tool-bg-start: #e3f2fd;
+    --write-tool-bg-end: #e8f5e9;
+    --write-tool-border: #4caf50;
+    --write-header-color: #2e7d32;
+    --write-fade: #e6f4ea;
+    --edit-tool-bg-start: #fff3e0;
+    --edit-tool-bg-end: #fce4ec;
+    --edit-tool-border: #ff9800;
+    --edit-header-color: #e65100;
+    --edit-fade: #fff0e5;
+    --edit-old-bg: #fce4ec;
+    --edit-old-label-bg: #f8bbd9;
+    --edit-old-label-color: #b71c1c;
+    --edit-old-content-color: #880e4f;
+    --edit-new-bg: #e8f5e9;
+    --edit-new-label-bg: #a5d6a7;
+    --edit-new-label-color: #1b5e20;
+    --edit-new-content-color: #1b5e20;
+    --todo-bg-start: #e8f5e9;
+    --todo-bg-end: #f1f8e9;
+    --todo-border: #81c784;
+    --todo-header-color: #2e7d32;
+    --todo-completed-icon: #2e7d32;
+    --todo-completed-content: #558b2f;
+    --todo-in-progress-icon: #f57c00;
+    --todo-in-progress-content: #e65100;
+    --todo-pending-icon: #757575;
+    --todo-pending-content: #616161;
+    --commit-bg: #fff3e0;
+    --commit-border: #ff9800;
+    --commit-text: #5d4037;
+    --commit-hash: #e65100;
+    --inline-code-bg: rgba(0,0,0,0.08);
+    --border-subtle: rgba(0,0,0,0.06);
+    --header-overlay: rgba(0,0,0,0.03);
+    --expand-btn-bg: rgba(0,0,0,0.05);
+    --expand-btn-hover: rgba(0,0,0,0.1);
+    --expand-btn-border: rgba(0,0,0,0.1);
+    --shadow-color: rgba(0,0,0,0.1);
+    --pagination-disabled-border: #ddd;
+}
+
+/* Dark mode - auto-detect from system preference */
+@media (prefers-color-scheme: dark) {
+    :root:not(.light-mode) {
+        --bg-color: #121212;
+        --card-bg: #1e1e1e;
+        --user-bg: #1a2634;
+        --user-border: #64b5f6;
+        --assistant-bg: #1e1e1e;
+        --assistant-border: #757575;
+        --thinking-bg: #2d2a1f;
+        --thinking-border: #ffc107;
+        --thinking-text: #b0b0b0;
+        --tool-bg: #2a1f2d;
+        --tool-border: #ce93d8;
+        --tool-result-bg: #1a2b1a;
+        --tool-error-bg: #2d1a1a;
+        --text-color: #e0e0e0;
+        --text-muted: #9e9e9e;
+        --code-bg: #0d1117;
+        --code-text: #aed581;
+        --tool-reply-bg: #2d2a1f;
+        --tool-reply-border: #ff9800;
+        --tool-reply-label: #ffb74d;
+        --write-tool-bg-start: #1a2634;
+        --write-tool-bg-end: #1a2b1a;
+        --write-tool-border: #66bb6a;
+        --write-header-color: #81c784;
+        --write-fade: #1a2b1a;
+        --edit-tool-bg-start: #2d2a1f;
+        --edit-tool-bg-end: #2a1f26;
+        --edit-tool-border: #ffb74d;
+        --edit-header-color: #ffb74d;
+        --edit-fade: #2d2a1f;
+        --edit-old-bg: #2d1a1a;
+        --edit-old-label-bg: #4a1f1f;
+        --edit-old-label-color: #ef9a9a;
+        --edit-old-content-color: #ef9a9a;
+        --edit-new-bg: #1a2b1a;
+        --edit-new-label-bg: #1f4a1f;
+        --edit-new-label-color: #a5d6a7;
+        --edit-new-content-color: #a5d6a7;
+        --todo-bg-start: #1a2b1a;
+        --todo-bg-end: #1f2d1a;
+        --todo-border: #66bb6a;
+        --todo-header-color: #81c784;
+        --todo-completed-icon: #81c784;
+        --todo-completed-content: #a5d6a7;
+        --todo-in-progress-icon: #ffb74d;
+        --todo-in-progress-content: #ffcc80;
+        --todo-pending-icon: #9e9e9e;
+        --todo-pending-content: #bdbdbd;
+        --commit-bg: #2d2a1f;
+        --commit-border: #ff9800;
+        --commit-text: #d7ccc8;
+        --commit-hash: #ffb74d;
+        --inline-code-bg: rgba(255,255,255,0.1);
+        --border-subtle: rgba(255,255,255,0.08);
+        --header-overlay: rgba(255,255,255,0.03);
+        --expand-btn-bg: rgba(255,255,255,0.05);
+        --expand-btn-hover: rgba(255,255,255,0.1);
+        --expand-btn-border: rgba(255,255,255,0.1);
+        --shadow-color: rgba(0,0,0,0.3);
+        --pagination-disabled-border: #444;
+    }
+}
+
+/* Manual dark mode toggle */
+.dark-mode {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --user-bg: #1a2634;
+    --user-border: #64b5f6;
+    --assistant-bg: #1e1e1e;
+    --assistant-border: #757575;
+    --thinking-bg: #2d2a1f;
+    --thinking-border: #ffc107;
+    --thinking-text: #b0b0b0;
+    --tool-bg: #2a1f2d;
+    --tool-border: #ce93d8;
+    --tool-result-bg: #1a2b1a;
+    --tool-error-bg: #2d1a1a;
+    --text-color: #e0e0e0;
+    --text-muted: #9e9e9e;
+    --code-bg: #0d1117;
+    --code-text: #aed581;
+    --tool-reply-bg: #2d2a1f;
+    --tool-reply-border: #ff9800;
+    --tool-reply-label: #ffb74d;
+    --write-tool-bg-start: #1a2634;
+    --write-tool-bg-end: #1a2b1a;
+    --write-tool-border: #66bb6a;
+    --write-header-color: #81c784;
+    --write-fade: #1a2b1a;
+    --edit-tool-bg-start: #2d2a1f;
+    --edit-tool-bg-end: #2a1f26;
+    --edit-tool-border: #ffb74d;
+    --edit-header-color: #ffb74d;
+    --edit-fade: #2d2a1f;
+    --edit-old-bg: #2d1a1a;
+    --edit-old-label-bg: #4a1f1f;
+    --edit-old-label-color: #ef9a9a;
+    --edit-old-content-color: #ef9a9a;
+    --edit-new-bg: #1a2b1a;
+    --edit-new-label-bg: #1f4a1f;
+    --edit-new-label-color: #a5d6a7;
+    --edit-new-content-color: #a5d6a7;
+    --todo-bg-start: #1a2b1a;
+    --todo-bg-end: #1f2d1a;
+    --todo-border: #66bb6a;
+    --todo-header-color: #81c784;
+    --todo-completed-icon: #81c784;
+    --todo-completed-content: #a5d6a7;
+    --todo-in-progress-icon: #ffb74d;
+    --todo-in-progress-content: #ffcc80;
+    --todo-pending-icon: #9e9e9e;
+    --todo-pending-content: #bdbdbd;
+    --commit-bg: #2d2a1f;
+    --commit-border: #ff9800;
+    --commit-text: #d7ccc8;
+    --commit-hash: #ffb74d;
+    --inline-code-bg: rgba(255,255,255,0.1);
+    --border-subtle: rgba(255,255,255,0.08);
+    --header-overlay: rgba(255,255,255,0.03);
+    --expand-btn-bg: rgba(255,255,255,0.05);
+    --expand-btn-hover: rgba(255,255,255,0.1);
+    --expand-btn-border: rgba(255,255,255,0.1);
+    --shadow-color: rgba(0,0,0,0.3);
+    --pagination-disabled-border: #444;
+}
+
+/* Manual light mode override (when user prefers dark but clicks toggle) */
+.light-mode {
+    --bg-color: #f5f5f5;
+    --card-bg: #ffffff;
+    --user-bg: #e3f2fd;
+    --user-border: #1976d2;
+    --assistant-bg: #f5f5f5;
+    --assistant-border: #9e9e9e;
+    --thinking-bg: #fff8e1;
+    --thinking-border: #ffc107;
+    --thinking-text: #666;
+    --tool-bg: #f3e5f5;
+    --tool-border: #9c27b0;
+    --tool-result-bg: #e8f5e9;
+    --tool-error-bg: #ffebee;
+    --text-color: #212121;
+    --text-muted: #757575;
+    --code-bg: #263238;
+    --code-text: #aed581;
+    --tool-reply-bg: #fff8e1;
+    --tool-reply-border: #ff9800;
+    --tool-reply-label: #e65100;
+    --write-tool-bg-start: #e3f2fd;
+    --write-tool-bg-end: #e8f5e9;
+    --write-tool-border: #4caf50;
+    --write-header-color: #2e7d32;
+    --write-fade: #e6f4ea;
+    --edit-tool-bg-start: #fff3e0;
+    --edit-tool-bg-end: #fce4ec;
+    --edit-tool-border: #ff9800;
+    --edit-header-color: #e65100;
+    --edit-fade: #fff0e5;
+    --edit-old-bg: #fce4ec;
+    --edit-old-label-bg: #f8bbd9;
+    --edit-old-label-color: #b71c1c;
+    --edit-old-content-color: #880e4f;
+    --edit-new-bg: #e8f5e9;
+    --edit-new-label-bg: #a5d6a7;
+    --edit-new-label-color: #1b5e20;
+    --edit-new-content-color: #1b5e20;
+    --todo-bg-start: #e8f5e9;
+    --todo-bg-end: #f1f8e9;
+    --todo-border: #81c784;
+    --todo-header-color: #2e7d32;
+    --todo-completed-icon: #2e7d32;
+    --todo-completed-content: #558b2f;
+    --todo-in-progress-icon: #f57c00;
+    --todo-in-progress-content: #e65100;
+    --todo-pending-icon: #757575;
+    --todo-pending-content: #616161;
+    --commit-bg: #fff3e0;
+    --commit-border: #ff9800;
+    --commit-text: #5d4037;
+    --commit-hash: #e65100;
+    --inline-code-bg: rgba(0,0,0,0.08);
+    --border-subtle: rgba(0,0,0,0.06);
+    --header-overlay: rgba(0,0,0,0.03);
+    --expand-btn-bg: rgba(0,0,0,0.05);
+    --expand-btn-hover: rgba(0,0,0,0.1);
+    --expand-btn-border: rgba(0,0,0,0.1);
+    --shadow-color: rgba(0,0,0,0.1);
+    --pagination-disabled-border: #ddd;
+}
+
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg-color); color: var(--text-color); margin: 0; padding: 16px; line-height: 1.6; transition: background-color 0.3s, color 0.3s; }
+.container { max-width: 800px; margin: 0 auto; }
+h1 { font-size: 1.5rem; margin-bottom: 24px; padding-bottom: 8px; border-bottom: 2px solid var(--user-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+h1 a { color: inherit; text-decoration: none; }
+.theme-toggle { background: var(--card-bg); border: 1px solid var(--user-border); border-radius: 8px; padding: 6px 12px; cursor: pointer; font-size: 1rem; color: var(--text-color); display: flex; align-items: center; gap: 6px; transition: background-color 0.2s; }
+.theme-toggle:hover { background: var(--user-bg); }
+.theme-toggle .icon { font-size: 1.1rem; }
+.message { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px var(--shadow-color); }
+.message.user { background: var(--user-bg); border-left: 4px solid var(--user-border); }
+.message.assistant { background: var(--card-bg); border-left: 4px solid var(--assistant-border); }
+.message.tool-reply { background: var(--tool-reply-bg); border-left: 4px solid var(--tool-reply-border); }
+.tool-reply .role-label { color: var(--tool-reply-label); }
+.tool-reply .tool-result { background: transparent; padding: 0; margin: 0; }
+.tool-reply .tool-result .truncatable.truncated::after { background: linear-gradient(to bottom, transparent, var(--tool-reply-bg)); }
+.message-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; background: var(--header-overlay); font-size: 0.85rem; }
+.role-label { font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.user .role-label { color: var(--user-border); }
+time { color: var(--text-muted); font-size: 0.8rem; }
+.timestamp-link { color: inherit; text-decoration: none; }
+.timestamp-link:hover { text-decoration: underline; }
+.message:target { animation: highlight 2s ease-out; }
+@keyframes highlight { 0% { background-color: rgba(25, 118, 210, 0.2); } 100% { background-color: transparent; } }
+.message-content { padding: 16px; }
+.message-content p { margin: 0 0 12px 0; }
+.message-content p:last-child { margin-bottom: 0; }
+.thinking { background: var(--thinking-bg); border: 1px solid var(--thinking-border); border-radius: 8px; padding: 12px; margin: 12px 0; font-size: 0.9rem; color: var(--thinking-text); }
+.thinking-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--thinking-border); margin-bottom: 8px; }
+.thinking p { margin: 8px 0; }
+.assistant-text { margin: 8px 0; }
+.tool-use { background: var(--tool-bg); border: 1px solid var(--tool-border); border-radius: 8px; padding: 12px; margin: 12px 0; }
+.tool-header { font-weight: 600; color: var(--tool-border); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.tool-icon { font-size: 1.1rem; }
+.tool-description { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; font-style: italic; }
+.tool-result { background: var(--tool-result-bg); border-radius: 8px; padding: 12px; margin: 12px 0; }
+.tool-result.tool-error { background: var(--tool-error-bg); }
+.file-tool { border-radius: 8px; padding: 12px; margin: 12px 0; }
+.write-tool { background: linear-gradient(135deg, var(--write-tool-bg-start) 0%, var(--write-tool-bg-end) 100%); border: 1px solid var(--write-tool-border); }
+.edit-tool { background: linear-gradient(135deg, var(--edit-tool-bg-start) 0%, var(--edit-tool-bg-end) 100%); border: 1px solid var(--edit-tool-border); }
+.file-tool-header { font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
+.write-header { color: var(--write-header-color); }
+.edit-header { color: var(--edit-header-color); }
+.file-tool-icon { font-size: 1rem; }
+.file-tool-path { font-family: monospace; background: var(--inline-code-bg); padding: 2px 8px; border-radius: 4px; }
+.file-tool-fullpath { font-family: monospace; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; word-break: break-all; }
+.file-content { margin: 0; }
+.edit-section { display: flex; margin: 4px 0; border-radius: 4px; overflow: hidden; }
+.edit-label { padding: 8px 12px; font-weight: bold; font-family: monospace; display: flex; align-items: flex-start; }
+.edit-old { background: var(--edit-old-bg); }
+.edit-old .edit-label { color: var(--edit-old-label-color); background: var(--edit-old-label-bg); }
+.edit-old .edit-content { color: var(--edit-old-content-color); }
+.edit-new { background: var(--edit-new-bg); }
+.edit-new .edit-label { color: var(--edit-new-label-color); background: var(--edit-new-label-bg); }
+.edit-new .edit-content { color: var(--edit-new-content-color); }
+.edit-content { margin: 0; flex: 1; background: transparent; font-size: 0.85rem; }
+.edit-replace-all { font-size: 0.75rem; font-weight: normal; color: var(--text-muted); }
+.write-tool .truncatable.truncated::after { background: linear-gradient(to bottom, transparent, var(--write-fade)); }
+.edit-tool .truncatable.truncated::after { background: linear-gradient(to bottom, transparent, var(--edit-fade)); }
+.todo-list { background: linear-gradient(135deg, var(--todo-bg-start) 0%, var(--todo-bg-end) 100%); border: 1px solid var(--todo-border); border-radius: 8px; padding: 12px; margin: 12px 0; }
+.todo-header { font-weight: 600; color: var(--todo-header-color); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
+.todo-items { list-style: none; margin: 0; padding: 0; }
+.todo-item { display: flex; align-items: flex-start; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--border-subtle); font-size: 0.9rem; }
+.todo-item:last-child { border-bottom: none; }
+.todo-icon { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 50%; }
+.todo-completed .todo-icon { color: var(--todo-completed-icon); background: rgba(46, 125, 50, 0.15); }
+.todo-completed .todo-content { color: var(--todo-completed-content); text-decoration: line-through; }
+.todo-in-progress .todo-icon { color: var(--todo-in-progress-icon); background: rgba(245, 124, 0, 0.15); }
+.todo-in-progress .todo-content { color: var(--todo-in-progress-content); font-weight: 500; }
+.todo-pending .todo-icon { color: var(--todo-pending-icon); background: var(--expand-btn-bg); }
+.todo-pending .todo-content { color: var(--todo-pending-content); }
+pre { background: var(--code-bg); color: var(--code-text); padding: 12px; border-radius: 6px; overflow-x: auto; font-size: 0.85rem; line-height: 1.5; margin: 8px 0; white-space: pre-wrap; word-wrap: break-word; }
+pre.json { color: #e0e0e0; }
+code { background: var(--inline-code-bg); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+pre code { background: none; padding: 0; }
+.user-content { margin: 0; }
+.truncatable { position: relative; }
+.truncatable.truncated .truncatable-content { max-height: 200px; overflow: hidden; }
+.truncatable.truncated::after { content: ''; position: absolute; bottom: 32px; left: 0; right: 0; height: 60px; background: linear-gradient(to bottom, transparent, var(--card-bg)); pointer-events: none; }
+.message.user .truncatable.truncated::after { background: linear-gradient(to bottom, transparent, var(--user-bg)); }
+.message.tool-reply .truncatable.truncated::after { background: linear-gradient(to bottom, transparent, var(--tool-reply-bg)); }
+.tool-use .truncatable.truncated::after { background: linear-gradient(to bottom, transparent, var(--tool-bg)); }
+.tool-result .truncatable.truncated::after { background: linear-gradient(to bottom, transparent, var(--tool-result-bg)); }
+.expand-btn { display: none; width: 100%; padding: 8px 16px; margin-top: 4px; background: var(--expand-btn-bg); border: 1px solid var(--expand-btn-border); border-radius: 6px; cursor: pointer; font-size: 0.85rem; color: var(--text-muted); }
+.expand-btn:hover { background: var(--expand-btn-hover); }
+.truncatable.truncated .expand-btn, .truncatable.expanded .expand-btn { display: block; }
+.pagination { display: flex; justify-content: center; gap: 8px; margin: 24px 0; flex-wrap: wrap; }
+.pagination a, .pagination span { padding: 5px 10px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; }
+.pagination a { background: var(--card-bg); color: var(--user-border); border: 1px solid var(--user-border); }
+.pagination a:hover { background: var(--user-bg); }
+.pagination .current { background: var(--user-border); color: white; }
+.pagination .disabled { color: var(--text-muted); border: 1px solid var(--pagination-disabled-border); }
+.pagination .index-link { background: var(--user-border); color: white; }
+details.continuation { margin-bottom: 16px; }
+details.continuation summary { cursor: pointer; padding: 12px 16px; background: var(--user-bg); border-left: 4px solid var(--user-border); border-radius: 12px; font-weight: 500; color: var(--text-muted); }
+details.continuation summary:hover { background: rgba(25, 118, 210, 0.15); }
+details.continuation[open] summary { border-radius: 12px 12px 0 0; margin-bottom: 0; }
+.index-item { margin-bottom: 16px; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px var(--shadow-color); background: var(--user-bg); border-left: 4px solid var(--user-border); }
+.index-item a { display: block; text-decoration: none; color: inherit; }
+.index-item a:hover { background: rgba(25, 118, 210, 0.1); }
+.index-item-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 16px; background: var(--header-overlay); font-size: 0.85rem; }
+.index-item-number { font-weight: 600; color: var(--user-border); }
+.index-item-content { padding: 16px; }
+.index-item-stats { padding: 8px 16px 12px 32px; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid var(--border-subtle); }
+.index-item-commit { margin-top: 6px; padding: 4px 8px; background: var(--commit-bg); border-radius: 4px; font-size: 0.85rem; color: var(--commit-hash); }
+.index-item-commit code { background: var(--inline-code-bg); padding: 1px 4px; border-radius: 3px; font-size: 0.8rem; margin-right: 6px; }
+.commit-card { margin: 8px 0; padding: 10px 14px; background: var(--commit-bg); border-left: 4px solid var(--commit-border); border-radius: 6px; }
+.commit-card a { text-decoration: none; color: var(--commit-text); display: block; }
+.commit-card a:hover { color: var(--commit-hash); }
+.commit-card-hash { font-family: monospace; color: var(--commit-hash); font-weight: 600; margin-right: 8px; }
+.index-commit { margin-bottom: 12px; padding: 10px 16px; background: var(--commit-bg); border-left: 4px solid var(--commit-border); border-radius: 8px; box-shadow: 0 1px 2px var(--shadow-color); }
+.index-commit a { display: block; text-decoration: none; color: inherit; }
+.index-commit a:hover { background: rgba(255, 152, 0, 0.1); margin: -10px -16px; padding: 10px 16px; border-radius: 8px; }
+.index-commit-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; margin-bottom: 4px; }
+.index-commit-hash { font-family: monospace; color: var(--commit-hash); font-weight: 600; }
+.index-commit-msg { color: var(--commit-text); }
+.index-item-long-text { margin-top: 8px; padding: 12px; background: var(--card-bg); border-radius: 8px; border-left: 3px solid var(--assistant-border); }
+.index-item-long-text .truncatable.truncated::after { background: linear-gradient(to bottom, transparent, var(--card-bg)); }
+.index-item-long-text-content { color: var(--text-color); }
+@media (max-width: 600px) { body { padding: 8px; } .message, .index-item { border-radius: 8px; } .message-content, .index-item-content { padding: 12px; } pre { font-size: 0.8rem; padding: 8px; } h1 { font-size: 1.25rem; } .theme-toggle { padding: 4px 8px; font-size: 0.9rem; } }
+</style>
+    <script>
+        // Apply theme immediately to prevent flash
+        (function() {
+            var stored = localStorage.getItem('claude-transcript-theme');
+            if (stored === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            } else if (stored === 'light') {
+                document.documentElement.classList.add('light-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            Claude Code transcript
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <span class="icon">&#9790;</span>
+                <span class="text">Dark</span>
+            </button>
+        </h1>
+        
+
+<div class="pagination">
+<span class="current">Index</span>
+<span class="disabled">&larr; Prev</span>
+<a href="page-001.html">1</a>
+<a href="page-001.html">Next &rarr;</a>
+</div>
+
+        <p style="color: var(--text-muted); margin-bottom: 24px;">2 prompts · 7 messages · 2 tool calls · 1 commits · 1 pages</p>
+        
+<div class="index-item"><a href="page-001.html#msg-2025-12-24T10-00-00-000Z"><div class="index-item-header"><span class="index-item-number">#1</span><time datetime="2025-12-24T10:00:00.000Z" data-timestamp="2025-12-24T10:00:00.000Z">2025-12-24T10:00:00.000Z</time></div><div class="index-item-content"><p>Create a hello world function</p></div></a><div class="index-item-stats"><span>1 write · 1 bash</span>
+</div></div><div class="index-commit"><div class="index-commit-header"><span class="index-commit-hash">abc1234</span><time datetime="2025-12-24T10:00:20.000Z" data-timestamp="2025-12-24T10:00:20.000Z">2025-12-24T10:00:20.000Z</time></div><div class="index-commit-msg">Add hello function</div></div>
+<div class="index-item"><a href="page-001.html#msg-2025-12-24T10-01-00-000Z"><div class="index-item-header"><span class="index-item-number">#2</span><time datetime="2025-12-24T10:01:00.000Z" data-timestamp="2025-12-24T10:01:00.000Z">2025-12-24T10:01:00.000Z</time></div><div class="index-item-content"><p>Now add a goodbye function</p></div></a></div>
+        
+
+<div class="pagination">
+<span class="current">Index</span>
+<span class="disabled">&larr; Prev</span>
+<a href="page-001.html">1</a>
+<a href="page-001.html">Next &rarr;</a>
+</div>
+
+    </div>
+    <script>
+// Theme toggle functionality
+(function() {
+    const STORAGE_KEY = 'claude-transcript-theme';
+    const root = document.documentElement;
+    
+    function getSystemPreference() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    
+    function getStoredPreference() {
+        return localStorage.getItem(STORAGE_KEY);
+    }
+    
+    function setTheme(theme) {
+        root.classList.remove('dark-mode', 'light-mode');
+        if (theme === 'dark') {
+            root.classList.add('dark-mode');
+        } else if (theme === 'light') {
+            root.classList.add('light-mode');
+        }
+        // Update button icon
+        const btn = document.querySelector('.theme-toggle');
+        if (btn) {
+            const icon = btn.querySelector('.icon');
+            const text = btn.querySelector('.text');
+            if (theme === 'dark' || (theme === 'system' && getSystemPreference() === 'dark')) {
+                icon.innerHTML = '&#9728;';
+                text.textContent = 'Light';
+            } else {
+                icon.innerHTML = '&#9790;';
+                text.textContent = 'Dark';
+            }
+        }
+    }
+    
+    function toggleTheme() {
+        const stored = getStoredPreference();
+        const system = getSystemPreference();
+        let newTheme;
+        
+        if (!stored) {
+            // First toggle: override system preference
+            newTheme = system === 'dark' ? 'light' : 'dark';
+        } else if (stored === 'dark') {
+            newTheme = 'light';
+        } else {
+            newTheme = 'dark';
+        }
+        
+        localStorage.setItem(STORAGE_KEY, newTheme);
+        setTheme(newTheme);
+    }
+    
+    // Initialize theme on load
+    const stored = getStoredPreference();
+    if (stored) {
+        setTheme(stored);
+    } else {
+        setTheme('system');
+    }
+    
+    // Listen for system preference changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!getStoredPreference()) {
+            setTheme('system');
+        }
+    });
+    
+    // Expose toggle function globally
+    window.toggleTheme = toggleTheme;
+})();
+
+document.querySelectorAll('time[data-timestamp]').forEach(function(el) {
+    const timestamp = el.getAttribute('data-timestamp');
+    const date = new Date(timestamp);
+    const now = new Date();
+    const isToday = date.toDateString() === now.toDateString();
+    const timeStr = date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+    if (isToday) { el.textContent = timeStr; }
+    else { el.textContent = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' ' + timeStr; }
+});
+document.querySelectorAll('pre.json').forEach(function(el) {
+    let text = el.textContent;
+    text = text.replace(/"([^"]+)":/g, '<span style="color: #ce93d8">"$1"</span>:');
+    text = text.replace(/: "([^"]*)"/g, ': <span style="color: #81d4fa">"$1"</span>');
+    text = text.replace(/: (\d+)/g, ': <span style="color: #ffcc80">$1</span>');
+    text = text.replace(/: (true|false|null)/g, ': <span style="color: #f48fb1">$1</span>');
+    el.innerHTML = text;
+});
+document.querySelectorAll('.truncatable').forEach(function(wrapper) {
+    const content = wrapper.querySelector('.truncatable-content');
+    const btn = wrapper.querySelector('.expand-btn');
+    if (content.scrollHeight > 250) {
+        wrapper.classList.add('truncated');
+        btn.addEventListener('click', function() {
+            if (wrapper.classList.contains('truncated')) { wrapper.classList.remove('truncated'); wrapper.classList.add('expanded'); btn.textContent = 'Show less'; }
+            else { wrapper.classList.remove('expanded'); wrapper.classList.add('truncated'); btn.textContent = 'Show more'; }
+        });
+    }
+});
+</script>
+</body>
+</html>

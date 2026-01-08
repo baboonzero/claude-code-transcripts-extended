@@ -1,0 +1,41 @@
+[project]
+name = "claude-code-transcripts-extended"
+version = "0.5"
+description = "Convert Claude Code session files to HTML transcripts with dark mode support and pattern extraction"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [
+    { name = "Simon Willison" },
+    { name = "baboonzero" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "click",
+    "click-default-group",
+    "httpx",
+    "jinja2",
+    "markdown",
+    "questionary",
+    "anthropic",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/baboonzero/claude-code-transcripts-extended"
+Changelog = "https://github.com/baboonzero/claude-code-transcripts-extended/releases"
+Issues = "https://github.com/baboonzero/claude-code-transcripts-extended/issues"
+CI = "https://github.com/baboonzero/claude-code-transcripts-extended/actions"
+
+[project.scripts]
+claude-code-transcripts-extended = "claude_code_transcripts:main"
+
+[build-system]
+requires = ["uv_build>=0.9.7,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-httpx>=0.35.0",
+    "syrupy>=5.0.0",
+]

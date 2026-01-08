@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Claude Code transcript{% endblock %}</title>
+    <style>{{ css|safe }}</style>
+    <script>
+        // Apply theme immediately to prevent flash
+        (function() {
+            var stored = localStorage.getItem('claude-transcript-theme');
+            if (stored === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            } else if (stored === 'light') {
+                document.documentElement.classList.add('light-mode');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+{%- block content %}{% endblock %}
+    </div>
+    <script>{{ js|safe }}</script>
+</body>
+</html>
