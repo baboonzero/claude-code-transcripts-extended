@@ -3,6 +3,8 @@
 [![Tests](https://github.com/baboonzero/claude-code-transcripts-extended/actions/workflows/test.yml/badge.svg)](https://github.com/baboonzero/claude-code-transcripts-extended/actions/workflows/test.yml)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/baboonzero/claude-code-transcripts-extended/blob/main/LICENSE)
 
+> **Note**: This project is based on [claude-code-transcripts](https://github.com/simonw/claude-code-transcripts) by [Simon Willison](https://github.com/simonw), licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
 Convert Claude Code session files (JSON or JSONL) to clean, mobile-friendly HTML pages with pagination, dark mode support, and pattern extraction.
 
 [Example transcript](https://static.simonwillison.net/static/2025/claude-code-microjs/index.html) produced using this tool.
@@ -246,10 +248,6 @@ claude-code-transcripts-extended patterns -o ./my_knowledge_bank.md
 ```
 
 The output is a Markdown file (`my_patterns.md` by default) containing your discovered patterns organized by category.
-
-## Acknowledgements
-
-This project is based on [claude-code-transcripts](https://github.com/simonw/claude-code-transcripts) by [Simon Willison](https://github.com/simonw), licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 ## Development
 
