@@ -889,7 +889,7 @@ class TestVersionOption:
         runner = CliRunner()
         result = runner.invoke(cli, ["--version"])
 
-        expected_version = importlib.metadata.version("claude-code-transcripts")
+        expected_version = importlib.metadata.version("claude-code-transcripts-extended")
         assert result.exit_code == 0
         assert expected_version in result.output
 
@@ -902,7 +902,7 @@ class TestVersionOption:
         runner = CliRunner()
         result = runner.invoke(cli, ["-v"])
 
-        expected_version = importlib.metadata.version("claude-code-transcripts")
+        expected_version = importlib.metadata.version("claude-code-transcripts-extended")
         assert result.exit_code == 0
         assert expected_version in result.output
 
