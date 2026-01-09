@@ -237,17 +237,58 @@ claude-code-transcripts-extended patterns
 # Extract prompts only (no API calls, useful for preview)
 claude-code-transcripts-extended patterns --extract-only
 
+# Auto-approve all patterns (skip interactive review)
+claude-code-transcripts-extended patterns --auto-approve
+
 # Review patterns interactively before saving
 claude-code-transcripts-extended patterns --review
 
 # Analyze only new sessions since last run
 claude-code-transcripts-extended patterns --update
 
+# Limit analysis to 10 sessions
+claude-code-transcripts-extended patterns --limit 10
+
 # Specify custom output path
 claude-code-transcripts-extended patterns -o ./my_knowledge_bank.md
 ```
 
-The output is a Markdown file (`my_patterns.md` by default) containing your discovered patterns organized by category.
+**Options:**
+
+- `-s, --source DIRECTORY` - source directory (default: `~/.claude/projects`)
+- `-o, --output PATH` - output path for knowledge bank (default: `./my_patterns.md`)
+- `--api-key KEY` - Anthropic API key (or use `ANTHROPIC_API_KEY` env var)
+- `--limit N` - maximum number of sessions to analyze
+- `--extract-only` - only extract prompts, skip LLM analysis
+- `--review` - review previously extracted patterns interactively
+- `--auto-approve` - automatically approve all patterns (skip interactive review)
+- `--update` - only analyze new sessions since last run
+- `-q, --quiet` - suppress progress output
+
+**Pattern categories:**
+
+The tool discovers patterns across these categories:
+
+| Category        | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| `coding_style`  | Naming conventions, formatting preferences            |
+| `architecture`  | File structure, design patterns, project organization |
+| `testing`       | Testing approaches, coverage expectations             |
+| `documentation` | Comments, README, JSDoc preferences                   |
+| `workflow`      | Git practices, PR conventions                         |
+| `tools`         | Preferred libraries, frameworks                       |
+| `communication` | How you prefer Claude to respond                      |
+| + custom        | Additional categories discovered from your sessions   |
+
+**Periodic updates:**
+
+Run `--update` periodically (e.g., every few weeks) to incorporate new sessions:
+
+```bash
+claude-code-transcripts-extended patterns --update --auto-approve
+```
+
+The tool tracks analyzed sessions in a state file (`.my_patterns_state.json`) alongside your output, so only new or modified sessions are processed.
 
 ## Development
 
